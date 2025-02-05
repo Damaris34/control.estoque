@@ -1,4 +1,4 @@
-let materiais = [];
+let materiais = JSON.parse(localStorage.getItem('materiais')) || [];
 
 document.getElementById('materialForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -9,6 +9,8 @@ document.getElementById('materialForm').addEventListener('submit', function(even
 
     const material = { nomeMaterial, quantidade, dataRegistro };
     materiais.push(material);
+
+    localStorage.setItem('materiais', JSON.stringify(materiais));
 
     adicionarMaterialNaTabela(material);
     limparFormulario();
@@ -61,3 +63,10 @@ function gerarRelatorioPDF() {
 
     doc.save('relatorio_estoque.pdf');
 }
+
+// Carregar dados salvos ao inicializar a página
+window.addEventListener('load', function() {
+    const tbody = document.querySelector('#estoqueTable tbody');
+    tbody.innerHTML = '';
+    materiais.forEach(material => adicionarMaterialNaTabela(material));
+});
