@@ -5,33 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
+    <h1>Controle de Estoque de Materiais de Construção Civil</h1>
     <div class="container">
-        <h1>Controle de Estoque</h1>
         <form id="materialForm">
-            <label for="codigo">Código:</label>
-            <input type="number" id="codigo" name="codigo" required>
-
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-
+            <label for="nomeMaterial">Nome do Material:</label>
+            <input type="text" id="nomeMaterial" required>
             <label for="quantidade">Quantidade:</label>
-            <input type="number" id="quantidade" name="quantidade" required>
-
-            <label for="unidade">Unidade:</label>
-            <input type="text" id="unidade" name="unidade" required>
-
+            <input type="number" id="quantidade" required>
+            <label for="dataRegistro">Data de Registro:</label>
+            <input type="date" id="dataRegistro" required>
             <button type="submit">Adicionar Material</button>
         </form>
-
-        <h2>Materiais no Estoque</h2>
-        <ul id="materialList"></ul>
-
-        <h2>Relatório de Estoque</h2>
-        <button id="gerarRelatorio">Gerar Relatório</button>
-        <pre id="relatorio"></pre>
+        <div class="filter">
+            <label for="filtroData">Filtrar por Data:</label>
+            <input type="date" id="filtroData">
+            <button onclick="filtrarPorData()">Filtrar</button>
+            <button onclick="gerarRelatorioPDF()">Gerar Relatório PDF</button>
+        </div>
+        <table id="estoqueTable">
+            <thead>
+                <tr>
+                    <th>Nome do Material</th>
+                    <th>Quantidade</th>
+                    <th>Data de Registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas da tabela serão inseridas aqui -->
+            </tbody>
+        </table>
     </div>
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
