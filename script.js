@@ -42,7 +42,11 @@ function filtrarPorData() {
     const tbody = document.querySelector('#estoqueTable tbody');
     tbody.innerHTML = '';
 
-    materiaisFiltrados.forEach(material => adicionarMaterialNaTabela(material));
+    if (materiaisFiltrados.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3">Nenhum material encontrado para a data selecionada.</td></tr>';
+    } else {
+        materiaisFiltrados.forEach(material => adicionarMaterialNaTabela(material));
+    }
 }
 
 function gerarRelatorioPDF() {
