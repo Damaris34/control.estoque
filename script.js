@@ -52,6 +52,11 @@ function gerarRelatorioPDF() {
     const dataFiltro = document.getElementById('filtroData').value;
     const materiaisFiltrados = materiais.filter(material => material.dataRegistro === dataFiltro);
 
+    if (materiaisFiltrados.length === 0) {
+        alert('Nenhum material encontrado para a data selecionada.');
+        return;
+    }
+
     doc.text('Relatório de Estoque', 10, 10);
     doc.text(`Data: ${dataFiltro}`, 10, 20);
 
