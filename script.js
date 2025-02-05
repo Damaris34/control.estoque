@@ -13,6 +13,7 @@ document.getElementById('materialForm').addEventListener('submit', function(even
     localStorage.setItem('materiais', JSON.stringify(materiais));
 
     adicionarMaterialNaTabela(material);
+    atualizarTotalRegistros();
     limparFormulario();
 });
 
@@ -47,6 +48,8 @@ function filtrarPorData() {
     } else {
         materiaisFiltrados.forEach(material => adicionarMaterialNaTabela(material));
     }
+
+    atualizarTotalRegistros();
 }
 
 function gerarRelatorioPDF() {
@@ -73,9 +76,15 @@ function gerarRelatorioPDF() {
     doc.save('relatorio_estoque.pdf');
 }
 
+function atualizarTotalRegistros() {
+    const totalRegistros = document.querySelector('#estoqueTable tbody').children.length;
+    document.getElementById('totalRegistros').textContent = totalRegistros;
+}
+
 // Carregar dados salvos ao inicializar a página
 window.addEventListener('load', function() {
     const tbody = document.querySelector('#estoqueTable tbody');
     tbody.innerHTML = '';
     materiais.forEach(material => adicionarMaterialNaTabela(material));
+    atualizarTotalRegistros();
 });
