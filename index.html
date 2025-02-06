@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Controle de Estoque</h1>
+        </header>
+
+        <main>
+            <section class="form-section">
+                <form id="materialForm">
+                    <label for="nomeMaterial">Nome do Material:</label>
+                    <input type="text" id="nomeMaterial" required>
+
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade" required>
+
+                    <label for="dataRegistro">Data de Registro:</label>
+                    <input type="date" id="dataRegistro" required>
+
+                    <label for="necessidadeCompra">Necessidade de Compra:</label>
+                    <select id="necessidadeCompra">
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+
+                    <button type="submit">Adicionar</button>
+                </form>
+            </section>
+
+            <section class="filters">
+                <label for="filtroData">Filtrar por Data:</label>
+                <input type="date" id="filtroData">
+                <button type="button" onclick="filtrarPorData()">Filtrar</button>
+                <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
+            </section>
+
+            <section class="table-section">
+                <table id="estoqueTable">
+                    <thead>
+                        <tr>
+                            <th>Nome do Material</th>
+                            <th>Quantidade</th>
+                            <th>Data de Registro</th>
+                            <th>Necessidade de Compra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas serão adicionadas dinamicamente aqui -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
 
