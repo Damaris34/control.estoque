@@ -1,79 +1,61 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
+// Armazenando os dados do estoque
+let estoque = [];
+
+// Função para adicionar dados ao estoque
+document.getElementById("estoqueForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const data = document.getElementById("data").value;
+    const nomeMaterial = document.getElementById("nomeMaterial").value;
+    const dataRelatorio = document.getElementById("dataRelatorio").value;
+
+    // Adicionando os dados ao array
+    estoque.push({ data, nomeMaterial, dataRelatorio });
+
+    // Atualizando a tabela
+    atualizarTabela();
+
+    // Limpando os campos do formulário
+    document.getElementById("estoqueForm").reset();
+});
+
+// Função para atualizar a tabela de estoque
+function atualizarTabela() {
+    const tabela = document.getElementById("tabelaEstoque").getElementsByTagName("tbody")[0];
+    tabela.innerHTML = ''; // Limpar conteúdo da tabela
+
+    estoque.forEach(item => {
+        const row = tabela.insertRow();
+        row.insertCell(0).textContent = item.data;
+        row.insertCell(1).textContent = item.nomeMaterial;
+        row.insertCell(2).textContent = item.dataRelatorio;
+    });
 }
 
-.container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 20px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+// Função para gerar o relatório em PDF
+document.getElementById("gerarRelatorio").addEventListener("click", function() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    let yPosition = 20;
+    
+    doc.text("Relatório de Estoque", 14, yPosition);
+    yPosition += 10;
 
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    // Cabeçalhos da tabela
+    doc.text("Data", 14, yPosition);
+    doc.text("Nome do Material", 50, yPosition);
+    doc.text("Data para Relatório", 120, yPosition);
+    yPosition += 10;
 
-header h1 {
-    color: #333;
-}
+    // Dados do estoque
+    estoque.forEach(item => {
+        doc.text(item.data, 14, yPosition);
+        doc.text(item.nomeMaterial, 50, yPosition);
+        doc.text(item.dataRelatorio, 120, yPosition);
+        yPosition += 10;
+    });
 
-.form-section, .filters, .table-section {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-top: 10px;
-}
-
-input, select, button {
-    width: calc(100% - 22px);
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #007BFF;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
+    // Gerando o PDF
+    doc.save("relatorio_estoque.pdf");
+});
