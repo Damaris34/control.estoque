@@ -10,34 +10,40 @@
     <div class="container">
         <header>
             <h1>Controle de Estoque de Materiais de Construção</h1>
-            <p>Gerencie seus materiais de forma eficiente</p>
+            <p>Gerencie seus materiais de forma eficiente e organizada</p>
         </header>
 
         <main>
             <section class="form-section">
                 <form id="materialForm">
-                    <label for="nomeMaterial">Nome do Material:</label>
-                    <input type="text" id="nomeMaterial" required>
-
-                    <label for="quantidade">Quantidade:</label>
-                    <input type="number" id="quantidade" required>
-
-                    <label for="dataRegistro">Data de Registro:</label>
-                    <input type="date" id="dataRegistro" required>
-
-                    <label for="necessidadeCompra">Necessidade de Compra:</label>
-                    <select id="necessidadeCompra">
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
-                    </select>
-
+                    <div class="form-group">
+                        <label for="nomeMaterial">Nome do Material:</label>
+                        <input type="text" id="nomeMaterial" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantidade">Quantidade:</label>
+                        <input type="number" id="quantidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataRegistro">Data de Registro:</label>
+                        <input type="date" id="dataRegistro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="necessidadeCompra">Necessidade de Compra:</label>
+                        <select id="necessidadeCompra">
+                            <option value="Sim">Sim</option>
+                            <option value="Não">Não</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn">Adicionar Material</button>
                 </form>
             </section>
 
             <section class="filters">
-                <label for="filtroData">Filtrar por Data:</label>
-                <input type="date" id="filtroData">
+                <div class="filter-group">
+                    <label for="filtroData">Filtrar por Data:</label>
+                    <input type="date" id="filtroData">
+                </div>
                 <button type="button" class="btn" onclick="filtrarPorData()">Filtrar</button>
                 <button type="button" class="btn" onclick="gerarRelatorio()">Gerar Relatório</button>
             </section>
