@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f8ff;
+    background-color: #e0f7fa;
     margin: 0;
     padding: 0;
     color: #333;
@@ -69,24 +69,4 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    padding: 15px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #004080;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
+    box-shadow: 0
