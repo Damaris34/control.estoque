@@ -1,41 +1,65 @@
-document.getElementById('materialForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    adicionarMaterial();
-});
-
-function adicionarMaterial() {
-    const nomeMaterial = document.getElementById('nomeMaterial').value;
-    const quantidade = document.getElementById('quantidade').value;
-    const dataRegistro = document.getElementById('dataRegistro').value;
-    const necessidadeCompra = document.getElementById('necessidadeCompra').value;
-
-    const tbody = document.querySelector('#estoqueTable tbody');
-    const newRow = tbody.insertRow();
-
-    newRow.insertCell(0).textContent = nomeMaterial;
-    newRow.insertCell(1).textContent = quantidade;
-    newRow.insertCell(2).textContent = dataRegistro;
-    newRow.insertCell(3).textContent = necessidadeCompra;
-
-    document.getElementById('materialForm').reset();
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-function filtrarPorData() {
-    const filtroData = document.getElementById('filtroData').value;
-    const rows = document.querySelectorAll('#estoqueTable tbody tr');
-
-    rows.forEach(row => {
-        const dataRegistro = row.cells[2].textContent;
-        if (filtroData === '' || dataRegistro === filtroData) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
-    });
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
 }
 
-function gerarRelatorio() {
-    const table = document.getElementById('estoqueTable');
-    const wb = XLSX.utils.table_to_book(table);
-    XLSX.writeFile(wb, 'relatorio_estoque.xlsx');
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, select, button {
+    margin-top: 5px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
