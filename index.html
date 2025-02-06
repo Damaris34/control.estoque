@@ -9,6 +9,8 @@
 <body>
     <div class="container">
         <h1>Controle de Estoque de Materiais de Construção</h1>
+
+        <!-- Formulário para adicionar materiais -->
         <form id="materialForm">
             <label for="nomeMaterial">Nome do Material:</label>
             <input type="text" id="nomeMaterial" required>
@@ -28,6 +30,7 @@
             <button type="submit">Adicionar Material</button>
         </form>
 
+        <!-- Filtros e botão para gerar relatório -->
         <div class="filters">
             <label for="filtroData">Filtrar por Data:</label>
             <input type="date" id="filtroData">
@@ -35,6 +38,7 @@
             <button onclick="gerarRelatorio()">Gerar Relatório</button>
         </div>
 
+        <!-- Tabela para exibir os materiais -->
         <table id="estoqueTable">
             <thead>
                 <tr>
@@ -50,6 +54,7 @@
         </table>
     </div>
 
+    <!-- Biblioteca para gerar arquivos Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="scripts.js"></script>
 </body>
