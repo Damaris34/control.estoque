@@ -8,53 +8,58 @@
 </head>
 <body>
     <div class="container">
-        <h1>Controle de Estoque de Materiais de Construção</h1>
+        <header>
+            <h1>Controle de Estoque de Materiais de Construção</h1>
+            <p>Gerencie seus materiais de forma eficiente</p>
+        </header>
 
-        <!-- Formulário para adicionar materiais -->
-        <form id="materialForm">
-            <label for="nomeMaterial">Nome do Material:</label>
-            <input type="text" id="nomeMaterial" required>
+        <main>
+            <section class="form-section">
+                <form id="materialForm">
+                    <label for="nomeMaterial">Nome do Material:</label>
+                    <input type="text" id="nomeMaterial" required>
 
-            <label for="quantidade">Quantidade:</label>
-            <input type="number" id="quantidade" required>
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade" required>
 
-            <label for="dataRegistro">Data de Registro:</label>
-            <input type="date" id="dataRegistro" required>
+                    <label for="dataRegistro">Data de Registro:</label>
+                    <input type="date" id="dataRegistro" required>
 
-            <label for="necessidadeCompra">Necessidade de Compra:</label>
-            <select id="necessidadeCompra">
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-            </select>
+                    <label for="necessidadeCompra">Necessidade de Compra:</label>
+                    <select id="necessidadeCompra">
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
 
-            <button type="submit">Adicionar Material</button>
-        </form>
+                    <button type="submit" class="btn">Adicionar Material</button>
+                </form>
+            </section>
 
-        <!-- Filtros e botão para gerar relatório -->
-        <div class="filters">
-            <label for="filtroData">Filtrar por Data:</label>
-            <input type="date" id="filtroData">
-            <button type="button" onclick="filtrarPorData()">Filtrar</button>
-            <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
-        </div>
+            <section class="filters">
+                <label for="filtroData">Filtrar por Data:</label>
+                <input type="date" id="filtroData">
+                <button type="button" class="btn" onclick="filtrarPorData()">Filtrar</button>
+                <button type="button" class="btn" onclick="gerarRelatorio()">Gerar Relatório</button>
+            </section>
 
-        <!-- Tabela para exibir os materiais -->
-        <table id="estoqueTable">
-            <thead>
-                <tr>
-                    <th>Nome do Material</th>
-                    <th>Quantidade</th>
-                    <th>Data de Registro</th>
-                    <th>Necessidade de Compra</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Linhas serão adicionadas dinamicamente aqui -->
-            </tbody>
-        </table>
+            <section class="table-section">
+                <table id="estoqueTable">
+                    <thead>
+                        <tr>
+                            <th>Nome do Material</th>
+                            <th>Quantidade</th>
+                            <th>Data de Registro</th>
+                            <th>Necessidade de Compra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas serão adicionadas dinamicamente aqui -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
     </div>
 
-    <!-- Biblioteca para gerar arquivos Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="scripts.js"></script>
 </body>
