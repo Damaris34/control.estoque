@@ -1,64 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Controle de Estoque - Materiais Civis</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-<h1>🏗️ Controle de Estoque - Materiais Civis</h1>
- 
-        <div class="form-group">
-<form id="materialForm">
-<div class="form-group">
-<label for="dataRegistro"><i class="fas fa-calendar-alt"></i> Data:</label>
-<input type="date" id="dataRegistro" required>
-</div>
- 
-                <div class="form-group">
-<label for="nomeMaterial"><i class="fas fa-box-open"></i> Nome do Material:</label>
-<input type="text" id="nomeMaterial" required>
-</div>
- 
-                <div class="form-group">
-<label for="quantidade"><i class="fas fa-cubes"></i> Quantidade:</label>
-<input type="number" id="quantidade" required>
-</div>
- 
-                <button type="button" onclick="validarFormulario()" id="submitButton">
-<i class="fas fa-save"></i> Adicionar Material
-</button>
-</form>
-</div>
- 
-        <div class="report-section">
-<h2><i class="fas fa-file-pdf"></i> Gerar Relatório</h2>
-<div class="report-controls">
-<input type="date" id="filtroData">
-<button onclick="gerarRelatorioPDF()">
-<i class="fas fa-download"></i> Gerar PDF
-</button>
-</div>
-<div id="statusMessage" class="status-message"></div>
-</div>
- 
-        <div class="management-section">
-<h2><i class="fas fa-database"></i> Gerenciamento de Registros</h2>
-<div class="search-controls">
-<input type="date" id="dataPesquisa">
-<button onclick="buscarRegistros()">
-<i class="fas fa-search"></i> Buscar
-</button>
-</div>
-<div id="resultadosPesquisa" class="hidden-results"></div>
-</div>
-</div>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-<script src="script.js"></script>
+    <div class="container">
+        <h1>Controle de Estoque de Materiais de Construção Civil</h1>
+        <form id="material-form">
+            <label for="nome">Nome do Material:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" required>
+
+            <label for="data">Data de Registro:</label>
+            <input type="date" id="data" name="data" required>
+
+            <button type="submit">Adicionar Material</button>
+        </form>
+
+        <div class="filters">
+            <label for="filter-date">Filtrar por Data:</label>
+            <input type="date" id="filter-date">
+            <button onclick="filterByDate()">Filtrar</button>
+            <button onclick="generatePDF()">Gerar Relatório PDF</button>
+        </div>
+
+        <table id="material-table">
+            <thead>
+                <tr>
+                    <th>Nome do Material</th>
+                    <th>Quantidade</th>
+                    <th>Data de Registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Materiais serão adicionados aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
