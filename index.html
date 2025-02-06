@@ -1,66 +1,123 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Estoque</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Controle de Estoque</h1>
-        </header>
+        <h1>Controle de Estoque</h1>
+        
+        <!-- Formulário de registro -->
+        <form id="estoqueForm">
+            <label for="data">Data:</label>
+            <input type="date" id="data" required><br>
+            
+            <label for="nomeMaterial">Nome do Material:</label>
+            <input type="text" id="nomeMaterial" required><br>
+            
+            <label for="dataRelatorio">Data para Relatório:</label>
+            <input type="date" id="dataRelatorio" required><br>
 
-        <main>
-            <section class="form-section">
-                <form id="materialForm">
-                    <label for="nomeMaterial">Nome do Material:</label>
-                    <input type="text" id="nomeMaterial" required>
+            <button type="submit">Adicionar</button>
+        </form>
 
-                    <label for="quantidade">Quantidade:</label>
-                    <input type="number" id="quantidade" required>
+        <h2>Lista de Materiais no Estoque</h2>
+        <table id="tabelaEstoque">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Nome do Material</th>
+                    <th>Data para Relatório</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados de estoque serão exibidos aqui -->
+            </tbody>
+        </table>
 
-                    <label for="dataRegistro">Data de Registro:</label>
-                    <input type="date" id="dataRegistro" required>
-
-                    <label for="necessidadeCompra">Necessidade de Compra:</label>
-                    <select id="necessidadeCompra">
-                        <option value="Sim">Sim</option>
-                        <option value="Não">Não</option>
-                    </select>
-
-                    <button type="submit">Adicionar</button>
-                </form>
-            </section>
-
-            <section class="filters">
-                <label for="filtroData">Filtrar por Data:</label>
-                <input type="date" id="filtroData">
-                <button type="button" onclick="filtrarPorData()">Filtrar</button>
-                <button type="button" onclick="gerarRelatorio()">Gerar Relatório</button>
-            </section>
-
-            <section class="table-section">
-                <table id="estoqueTable">
-                    <thead>
-                        <tr>
-                            <th>Nome do Material</th>
-                            <th>Quantidade</th>
-                            <th>Data de Registro</th>
-                            <th>Necessidade de Compra</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Linhas serão adicionadas dinamicamente aqui -->
-                    </tbody>
-                </table>
-            </section>
-        </main>
+        <button id="gerarRelatorio">Gerar Relatório PDF</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+2. Arquivo CSS (style.css)
+css
+Copiar
+/* Estilo básico */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
 
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="date"], input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+#gerarRelatorio {
+    background-color: #007bff;
+}
+
+#gerarRelatorio:hover {
+    background-color: #0056b3;
