@@ -1,61 +1,45 @@
-// Armazenando os dados do estoque
-let estoque = [];
-
-// Função para adicionar dados ao estoque
-document.getElementById("estoqueForm").addEventListener("submit", function(event) {
+document.getElementById('estoqueForm').addEventListener('submit', function(event) {
     event.preventDefault();
-
-    const data = document.getElementById("data").value;
-    const nomeMaterial = document.getElementById("nomeMaterial").value;
-    const dataRelatorio = document.getElementById("dataRelatorio").value;
-
-    // Adicionando os dados ao array
-    estoque.push({ data, nomeMaterial, dataRelatorio });
-
-    // Atualizando a tabela
-    atualizarTabela();
-
-    // Limpando os campos do formulário
-    document.getElementById("estoqueForm").reset();
+    adicionarMaterial();
 });
 
-// Função para atualizar a tabela de estoque
-function atualizarTabela() {
-    const tabela = document.getElementById("tabelaEstoque").getElementsByTagName("tbody")[0];
-    tabela.innerHTML = ''; // Limpar conteúdo da tabela
+document.getElementById('gerarRelatorio').addEventListener('click', gerarRelatorio);
 
-    estoque.forEach(item => {
-        const row = tabela.insertRow();
-        row.insertCell(0).textContent = item.data;
-        row.insertCell(1).textContent = item.nomeMaterial;
-        row.insertCell(2).textContent = item.dataRelatorio;
-    });
+function adicionarMaterial() {
+    const data = document.getElementById('data').value;
+    const nomeMaterial = document.getElementById('nomeMaterial').value;
+    const dataRelatorio = document.getElementById('dataRelatorio').value;
+
+    const tbody = document.querySelector('#tabelaEstoque tbody');
+    const newRow = tbody.insertRow();
+
+    newRow.insertCell(0).textContent = data;
+    newRow.insertCell(1).textContent = nomeMaterial;
+    newRow.insertCell(2).textContent = dataRelatorio;
+
+    document.getElementById('estoqueForm').reset();
 }
 
-// Função para gerar o relatório em PDF
-document.getElementById("gerarRelatorio").addEventListener("click", function() {
+function gerarRelatorio() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    
-    let yPosition = 20;
-    
-    doc.text("Relatório de Estoque", 14, yPosition);
-    yPosition += 10;
 
-    // Cabeçalhos da tabela
-    doc.text("Data", 14, yPosition);
-    doc.text("Nome do Material", 50, yPosition);
-    doc.text("Data para Relatório", 120, yPosition);
-    yPosition += 10;
+    const table = document.getElementById('tabelaEstoque');
+    const rows = table.rows;
 
-    // Dados do estoque
-    estoque.forEach(item => {
-        doc.text(item.data, 14, yPosition);
-        doc.text(item.nomeMaterial, 50, yPosition);
-        doc.text(item.dataRelatorio, 120, yPosition);
-        yPosition += 10;
-    });
+    let y = 10;
+    doc.text("Relatório de Estoque", 10, y);
+    y += 10;
 
-    // Gerando o PDF
-    doc.save("relatorio_estoque.pdf");
-});
+    for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].cells;
+        let text = '';
+        for (let j = 0; j < cells.length; j++) {
+            text += cells[j].textContent + '\t';
+        }
+        doc.text(text, 10, y);
+        y += 10;
+    }
+
+    doc.save('relatorio_estoque.pdf');
+}
