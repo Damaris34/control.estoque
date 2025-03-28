@@ -1,45 +1,37 @@
-document.getElementById('estoqueForm').addEventListener('submit', function(event) {
+document.getElementById('stockForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    adicionarMaterial();
+    // Aqui você pode adicionar a lógica para enviar os dados para o servidor Java
+    alert('Dados registrados com sucesso!');
 });
 
-document.getElementById('gerarRelatorio').addEventListener('click', gerarRelatorio);
+document.getElementById('exportPdf').addEventListener('click', function() {
+    // Aqui você pode adicionar a lógica para exportar os dados para PDF
+    alert('Exportação para PDF iniciada!');
+});
+import org.springframework.web.bind.annotation.*;
 
-function adicionarMaterial() {
-    const data = document.getElementById('data').value;
-    const nomeMaterial = document.getElementById('nomeMaterial').value;
-    const dataRelatorio = document.getElementById('dataRelatorio').value;
+@RestController
+@RequestMapping("/api/stock")
+public class StockController {
 
-    const tbody = document.querySelector('#tabelaEstoque tbody');
-    const newRow = tbody.insertRow();
-
-    newRow.insertCell(0).textContent = data;
-    newRow.insertCell(1).textContent = nomeMaterial;
-    newRow.insertCell(2).textContent = dataRelatorio;
-
-    document.getElementById('estoqueForm').reset();
-}
-
-function gerarRelatorio() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    const table = document.getElementById('tabelaEstoque');
-    const rows = table.rows;
-
-    let y = 10;
-    doc.text("Relatório de Estoque", 10, y);
-    y += 10;
-
-    for (let i = 0; i < rows.length; i++) {
-        const cells = rows[i].cells;
-        let text = '';
-        for (let j = 0; j < cells.length; j++) {
-            text += cells[j].textContent + '\t';
-        }
-        doc.text(text, 10, y);
-        y += 10;
+    @PostMapping("/register")
+    public String registerStock(@RequestBody StockData stockData) {
+        // Lógica para registrar o estoque
+        return "Estoque registrado com sucesso!";
     }
 
-    doc.save('relatorio_estoque.pdf');
+    @GetMapping("/exportPdf")
+    public void exportPdf() {
+        // Lógica para exportar para PDF usando iText ou Apache PDFBox
+    }
+}
+
+class StockData {
+    private String registrationDate;
+    private String materialName;
+    private int quantityUsed;
+    private String missingMaterial;
+    private int purchaseQuantity;
+
+    // Getters e Setters
 }
